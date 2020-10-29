@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CoronaChecker</string>
+    <string name="add_person">Add Person</string>
+    <string name="hint_word_name">Name</string>
+    <string name="hint_word_plz">PLZ</string>
+    <string name="button_save">Save</string>
+    <string name="empty_not_saved">Person not saved because it is empty.</string>
+</resources>

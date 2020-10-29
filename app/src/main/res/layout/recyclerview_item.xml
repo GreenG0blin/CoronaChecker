@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp">
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="297dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textAlignment="viewStart"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/countyView"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:forceHasOverlappingRendering="false"
+            android:gravity="center|top"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="test"
+            android:textSize="12sp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/incidenceView"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:textAlignment="center"
+            app:chipBackgroundColor="#4CAF50" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
