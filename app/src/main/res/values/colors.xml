@@ -13,4 +13,5 @@
     <color name="statusGreen">#5FB851</color>
     <color name="statusYellow">#FBB96A</color>
     <color name="statusRed">#FF6969</color>
+    <color name="background">#ECECEC</color>
 </resources>

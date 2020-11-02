@@ -12,38 +12,66 @@
         app:contentPaddingLeft="10dp"
         app:contentPaddingRight="10dp">
 
-        <TextView
-            android:id="@+id/nameView"
-            android:layout_width="297dp"
+        <RelativeLayout
+            android:layout_width="273dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/nameView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="false"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="sans-serif"
+                android:gravity="start|top|center_vertical"
+                android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/countyView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="false"
+                android:layout_below="@id/nameView"
+                android:layout_alignParentBottom="false"
+                android:layout_gravity="top"
+                android:forceHasOverlappingRendering="false"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:fontFamily="sans-serif"
-            android:gravity="center"
-            android:textAlignment="viewStart"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="18sp" />
+            android:layout_gravity="end"
+            android:gravity="center_horizontal|end">
 
-        <TextView
-            android:id="@+id/countyView"
-            android:layout_width="94dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:forceHasOverlappingRendering="false"
-            android:gravity="center|top"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:text="test"
-            android:textSize="12sp" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/incidenceView"
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
+                android:textAlignment="center"
+                app:chipBackgroundColor="#4CAF50" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/incidenceView"
-            android:layout_width="94dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top|end"
-            android:fontFamily="sans-serif-medium"
-            android:includeFontPadding="false"
-            android:textAlignment="center"
-            app:chipBackgroundColor="#4CAF50" />
+            <TextView
+                android:id="@+id/lastUpdatedView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:forceHasOverlappingRendering="false"
+                android:foregroundGravity="bottom"
+                android:gravity="top"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:textSize="12sp" />
+        </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

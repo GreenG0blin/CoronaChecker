@@ -16,13 +16,14 @@ import java.util.List;
 
 import de.com.coronachecker.R;
 import de.com.coronachecker.persistence.entities.Person;
-import de.com.coronachecker.persistence.entities.Status;
+import de.com.coronachecker.persistence.entities.enums.Status;
 
 public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.PersonViewHolder> {
 
     public class PersonViewHolder extends RecyclerView.ViewHolder {
         private final TextView nameItemView;
         private final TextView countyItemView;
+        private final TextView lastUpdatedView;
         private final Chip incidenceChip;
 
 
@@ -30,6 +31,7 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
             super(itemView);
             nameItemView = itemView.findViewById(R.id.nameView);
             countyItemView = itemView.findViewById(R.id.countyView);
+            lastUpdatedView = itemView.findViewById(R.id.lastUpdatedView);
             incidenceChip = itemView.findViewById(R.id.incidenceView);
         }
 
@@ -58,6 +60,8 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
             holder.nameItemView.setText(current.getName());
             holder.incidenceChip.setText(df.format(current.sevenDaysIncidence));
             holder.countyItemView.setText(current.getCounty());
+            holder.lastUpdatedView.setText(current.getLastUpdated());
+
             if(current.getStatus().equals(Status.GREEN)) {
                 holder.incidenceChip.setChipBackgroundColorResource(R.color.statusGreen);
             }

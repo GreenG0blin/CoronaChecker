@@ -1,6 +1,4 @@
-package de.com.coronachecker.api.rest.controller;
-
-import android.os.AsyncTask;
+package de.com.coronachecker.api.rest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,11 +14,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.com.coronachecker.api.County;
-import lombok.SneakyThrows;
+import de.com.coronachecker.api.model.County;
 
 
-public class RkiDataController extends AsyncTask<County,Void,List<County>> {
+public class RkiDataController {
 
     public List<County> getRkiData() throws JSONException {
         final String url = "https://services7.arcgis.com/mOBPykOjAyBO2ZKk/arcgis/rest/services/RKI_Landkreisdaten/FeatureServer/0/query";
@@ -33,7 +30,7 @@ public class RkiDataController extends AsyncTask<County,Void,List<County>> {
 
         UriComponents uriBuilder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("where", "1=1")
-                .queryParam("outFields", "GEN", "cases7_per_100k")
+                .queryParam("outFields", "GEN", "cases7_per_100k", "last_update")
                 .queryParam("returnGeometry", "false")
                 .queryParam("f", "json")
                 .build();
@@ -51,19 +48,24 @@ public class RkiDataController extends AsyncTask<County,Void,List<County>> {
 
         for (int i = 0; i < jsonArray.length(); i++) {
 
-            countyList.add(County.builder()
-                    .casesPer100k(jsonArray.getJSONObject(i).getJSONObject("attributes").getString("cases7_per_100k"))
+            County county = County.builder()
+                    .casesPer100k(Float.parseFloat(jsonArray.getJSONObject(i).getJSONObject("attributes").getString("cases7_per_100k")))
                     .name(jsonArray.getJSONObject(i).getJSONObject("attributes").getString("GEN"))
-                    .build());
+                    .lastUpdated(jsonArray.getJSONObject(i).getJSONObject("attributes").getString("last_update"))
+                    .build();
+
+            if (county.getCasesPer100k() > 50) {
+                county.setStatus(de.com.coronachecker.persistence.entities.enums.Status.RED);
+            }
+            if (county.getCasesPer100k() > 30 && county.getCasesPer100k() < 50) {
+                county.setStatus(de.com.coronachecker.persistence.entities.enums.Status.YELLOW);
+            }
+            if (county.getCasesPer100k() < 30) {
+                county.setStatus(de.com.coronachecker.persistence.entities.enums.Status.GREEN);
+            }
+            countyList.add(county);
         }
 
-
         return countyList;
-    }
-
-    @SneakyThrows
-    @Override
-    protected List<County> doInBackground(County... counties) {
-        return this.getRkiData();
     }
 }

@@ -1,8 +1,8 @@
-package de.com.coronachecker.config.converter;
+package de.com.coronachecker.persistence.config;
 
 import androidx.room.TypeConverter;
 
-import de.com.coronachecker.persistence.entities.Status;
+import de.com.coronachecker.persistence.entities.enums.Status;
 
 public class StatusConverter {
 

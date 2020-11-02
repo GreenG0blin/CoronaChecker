@@ -5,12 +5,17 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import lombok.Getter;
-import lombok.Setter;
+import de.com.coronachecker.persistence.entities.enums.Status;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(tableName = "person_table")
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Person {
 
     @PrimaryKey(autoGenerate = true)
@@ -21,11 +26,18 @@ public class Person {
     public String name;
 
     @ColumnInfo(name = "status")
+    @NonNull
     public Status status;
 
     @ColumnInfo(name = "7-days-incidence")
-    public Float sevenDaysIncidence;
+    @NonNull
+    public float sevenDaysIncidence;
 
     @ColumnInfo(name = "county")
+    @NonNull
     public String county;
+
+    @ColumnInfo(name = "last_updated")
+    @NonNull
+    public String lastUpdated;
 }

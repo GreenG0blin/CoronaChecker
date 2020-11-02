@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -19,12 +20,6 @@ public interface PersonDao {
     @Insert
     void insert(Person person);
 
-    @Delete
-    void delete(Person person);
-
-    @Delete
-    void deleteAll(Person... persons);
-
-    @Query("DELETE FROM person_table")
-    void deleteAll();
+    @Update
+    void updatePerson(Person... person);
 }
