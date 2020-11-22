@@ -3,12 +3,12 @@ package de.com.coronachecker.view;
 import android.app.Application;
 import android.content.Intent;
 
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
@@ -19,7 +19,7 @@ import de.com.coronachecker.services.RefreshService;
 
 public class PersonViewModel extends AndroidViewModel {
 
-    private DataRepository dataRepository;
+    private final DataRepository dataRepository;
 
     public PersonViewModel(@NonNull Application application) {
         super(application);
@@ -38,7 +38,7 @@ public class PersonViewModel extends AndroidViewModel {
 
         Optional<Person> person = personService.execute().get();
 
-        person.ifPresent(p -> dataRepository.insert(p));
+        person.ifPresent(dataRepository::insert);
 
         return person;
     }
@@ -52,8 +52,12 @@ public class PersonViewModel extends AndroidViewModel {
 
         List<Person> newPersonList = refreshService.execute().get();
 
-        newPersonList.forEach(person -> dataRepository.update(person));
+        newPersonList.forEach(dataRepository::update);
 
+    }
+
+    public void deletePerson(Person person) {
+        dataRepository.delete(person);
     }
 
 }

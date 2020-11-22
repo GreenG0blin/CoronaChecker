@@ -5,25 +5,22 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 import de.com.coronachecker.R;
-import de.com.coronachecker.services.PersonService;
-import de.com.coronachecker.services.RefreshService;
 import de.com.coronachecker.persistence.entities.Person;
 import de.com.coronachecker.view.PersonListAdapter;
 import de.com.coronachecker.view.PersonViewModel;
+import de.com.coronachecker.helper.SwipeToDelete;
 import lombok.SneakyThrows;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,13 +45,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final PersonListAdapter adapter = new PersonListAdapter(this);
+
+        PersonListAdapter.OnDismissListener listener = person -> mPersonViewModel.deletePerson(person);
+
+        final PersonListAdapter adapter = new PersonListAdapter(this, listener);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         mPersonViewModel = new ViewModelProvider(this).get(PersonViewModel.class);
         mPersonViewModel.getAllPersons().observe(this, adapter::setPersons);
 
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new SwipeToDelete(adapter));
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {

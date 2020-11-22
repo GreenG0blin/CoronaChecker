@@ -1,5 +1,6 @@
 package de.com.coronachecker.view;
 
+import android.animation.LayoutTransition;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.behavior.SwipeDismissBehavior;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Optional;
 
 import de.com.coronachecker.R;
 import de.com.coronachecker.persistence.entities.Person;
@@ -25,7 +31,6 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
         private final TextView countyItemView;
         private final TextView lastUpdatedView;
         private final Chip incidenceChip;
-
 
         private PersonViewHolder(View itemView) {
             super(itemView);
@@ -40,17 +45,19 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
     private final DecimalFormat df = new DecimalFormat("0.0");
     private final LayoutInflater mInflater;
     private List<Person> mPersons;
+    private final PersonListAdapter.OnDismissListener listener;
 
-    public PersonListAdapter(Context context) {
-        mInflater = LayoutInflater.from(context);
+    public PersonListAdapter(Context context, OnDismissListener listener) {
+        this.mInflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
-        return new PersonViewHolder(itemView);
 
+        return new PersonViewHolder(itemView);
     }
 
     @Override
@@ -90,5 +97,18 @@ public class PersonListAdapter extends RecyclerView.Adapter<PersonListAdapter.Pe
             return mPersons.size();
         else return 0;
     }
+
+    public void deleteItem(int position) {
+        Person personToDelete = mPersons.get(position);
+        listener.onDismiss(personToDelete);
+
+        mPersons.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public interface OnDismissListener {
+        void onDismiss(Person person);
+    }
+
 }
 

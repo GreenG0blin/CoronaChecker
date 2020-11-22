@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,14 +11,14 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="290dp"
         android:layout_gravity="center_horizontal"
         app:contentPaddingBottom="16dp"
         app:contentPaddingTop="16dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="320dp">
+            android:layout_height="267dp">
 
             <Button
                 android:id="@+id/button_save"
@@ -29,9 +29,9 @@
                 android:layout_marginTop="@dimen/big_padding"
                 android:layout_marginEnd="@dimen/big_padding"
                 android:layout_marginBottom="@dimen/big_padding"
-                android:background="@color/colorPrimary"
+                android:background="@color/background"
                 android:text="@string/button_save"
-                android:textColor="@color/cardview_light_background" />
+                android:textColor="@color/black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edit_plz"
@@ -40,16 +40,15 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@id/button_save"
                 android:hint="@string/hint_word_plz"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="5">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
                     android:inputType="numberDecimal"
                     android:maxLength="5" />
 
@@ -64,21 +63,22 @@
                 android:layout_above="@id/edit_plz"
                 android:layout_alignParentTop="false"
                 android:hint="@string/hint_word_name"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="30">
+                app:counterMaxLength="20">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:maxLength="30" />
+                    android:maxLength="30"
+                    android:textColorLink="@color/colorPrimary"
+                    app:textInputLayoutFocusedRectEnabled="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,6 +1,7 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -17,9 +18,6 @@
             android:id="@+id/recyclerview"
             android:layout_width="409dp"
             android:layout_height="0dp"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
             tools:listitem="@layout/recyclerview_item">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -28,8 +26,9 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="56dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal|end"
         android:layout_margin="16dp"
         android:contentDescription="@string/add_person"
         android:forceHasOverlappingRendering="false"
@@ -43,4 +42,4 @@
         app:layout_constraintVertical_bias="1.0"
         app:rippleColor="#FFFFFF" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

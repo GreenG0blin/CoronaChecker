@@ -44,4 +44,10 @@ public class DataRepository {
     public Optional<String> getCountyByZipcode(String zipcode) {
         return mZipcodeDao.findCountyByZipcode(zipcode);
     }
+
+    public void delete(Person person) {
+        Database.databaseWriteExecutor.execute(() -> {
+            mPersonDao.delete(person);
+        });
+    }
 }
